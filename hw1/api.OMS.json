@@ -1,0 +1,560 @@
+{
+	"info": {
+		"_postman_id": "fbfa71d2-7753-4b00-bc4e-2ddf3e8daf2e",
+		"name": "api",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20335617"
+	},
+	"item": [
+		{
+			"name": "authorization",
+			"item": [
+				{
+					"name": "v1_GetToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"try {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  const accessToken = responseJson.access_token;\r",
+									"\r",
+									"  if (accessToken) {\r",
+									"    // Обновление переменной среды\r",
+									"    pm.environment.set('jwt', accessToken);\r",
+									"  } else {\r",
+									"    console.error('Токен доступа не найден в ответе сервера');\r",
+									"  }\r",
+									"} catch (error) {\r",
+									"  console.error('Ошибка при чтении JSON-ответа:', error);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Cookie",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "agency-1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "asdfghjkl1!2@",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/v1/keycloak/protocol/openid-connect/token"
+					},
+					"response": []
+				},
+				{
+					"name": "v1_auth_login_create",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "{{basicAuthPassword}}",
+								"username": "{{basicAuthUsername}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "string",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "string",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "string",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "string",
+									"type": "text"
+								},
+								{
+									"key": "sms_token",
+									"value": "string",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/v1/auth/login/",
+						"description": "AllowAny: Allow any access. This isn't strictly required, since you could use an empty permission_classes list, but it's useful because it makes the intention more explicit."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oms1",
+			"item": [
+				{
+					"name": "healthcheck",
+					"item": [
+						{
+							"name": "liveness oms1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms1/healthcheck/liveness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						},
+						{
+							"name": "readiness oms1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms1/healthcheck/readiness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "agency",
+					"item": [
+						{
+							"name": "POST v1/agency",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/agency/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/agency",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/agency/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/agency",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/agency/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/agency",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/agency/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "employees",
+					"item": [
+						{
+							"name": "POST v1/employees",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/employees/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/employees",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/employees/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/employees",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/employees/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/employees",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/employees/"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Optional Micro Service 1"
+		},
+		{
+			"name": "oms2",
+			"item": [
+				{
+					"name": "healthcheck",
+					"item": [
+						{
+							"name": "liveness oms2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms2/healthcheck/liveness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						},
+						{
+							"name": "readiness oms2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms2/healthcheck/readiness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "client",
+					"item": [
+						{
+							"name": "POST v1/client",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/client/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/client",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/client/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/client",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/client/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/client",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/client/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "timesheet",
+					"item": [
+						{
+							"name": "POST v1/timesheet",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/timesheet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/timesheet",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/timesheet",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "shifts",
+					"item": [
+						{
+							"name": "POST v1/shifts",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/shifts/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/shifts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/shifts/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/shifts",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/shifts/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/shifts",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/shifts/"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Optional Micro Service 2"
+		},
+		{
+			"name": "oms3",
+			"item": [
+				{
+					"name": "healthcheck",
+					"item": [
+						{
+							"name": "liveness oms3",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms3/healthcheck/liveness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						},
+						{
+							"name": "readiness oms3",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}oms3/healthcheck/readiness",
+								"description": "Endpoint checking correctly working service-1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reports",
+					"item": [
+						{
+							"name": "GET v1/reportitems",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/reportitems/",
+								"description": "List reports"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/reportitems",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}api/v1/reportitems/?id=<integer>",
+									"host": [
+										"{{base_url}}api"
+									],
+									"path": [
+										"v1",
+										"reportitems",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "<integer>"
+										}
+									]
+								},
+								"description": "Delete report"
+							},
+							"response": []
+						},
+						{
+							"name": "POST v1/reportitems/import/",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/reportitems/import/",
+								"description": "Import report on server"
+							},
+							"response": []
+						},
+						{
+							"name": "POST v1/reportitems/export/",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/reportitems/export/",
+								"description": "Export report from server"
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Optional Micro Service 3"
+		},
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "payment",
+					"item": [
+						{
+							"name": "POST v1/payments",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/payments/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/payments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/payments/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "notification",
+					"item": []
+				},
+				{
+					"name": "rating",
+					"item": []
+				},
+				{
+					"name": "planning",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "v2",
+			"item": [
+				{
+					"name": "notification",
+					"item": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "123"
+		}
+	]
+}
