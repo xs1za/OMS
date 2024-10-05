@@ -305,47 +305,6 @@
 					]
 				},
 				{
-					"name": "timesheet",
-					"item": [
-						{
-							"name": "POST v1/timesheet",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": "{{base_url}}api/v1/timesheet/"
-							},
-							"response": []
-						},
-						{
-							"name": "GET v1/timesheet",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base_url}}api/v1/timesheet/"
-							},
-							"response": []
-						},
-						{
-							"name": "PATCH v1/timesheet",
-							"request": {
-								"method": "PATCH",
-								"header": [],
-								"url": "{{base_url}}api/v1/timesheet/"
-							},
-							"response": []
-						},
-						{
-							"name": "DELETE v1/timesheet",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": "{{base_url}}api/v1/timesheet/"
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "shifts",
 					"item": [
 						{
@@ -381,6 +340,47 @@
 								"method": "DELETE",
 								"header": [],
 								"url": "{{base_url}}api/v1/shifts/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "timesheet",
+					"item": [
+						{
+							"name": "POST v1/timesheet",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "GET v1/timesheet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH v1/timesheet",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE v1/timesheet",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}api/v1/timesheet/"
 							},
 							"response": []
 						}
@@ -509,15 +509,45 @@
 				},
 				{
 					"name": "notification",
-					"item": []
+					"item": [
+						{
+							"name": "POST v1/notifi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/notifi/"
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "rating",
-					"item": []
+					"item": [
+						{
+							"name": "POST v1/rating",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/payments/"
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "planning",
-					"item": []
+					"item": [
+						{
+							"name": "POST v1/planning",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v1/planning/"
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -526,7 +556,17 @@
 			"item": [
 				{
 					"name": "notification",
-					"item": []
+					"item": [
+						{
+							"name": "POST v2/notifi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": "{{base_url}}api/v2/payments/"
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
