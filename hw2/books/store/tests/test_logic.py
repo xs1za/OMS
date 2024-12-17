@@ -1,0 +1,4 @@
+
+
+class LogicTestCase(TestCase):
+    pass 
